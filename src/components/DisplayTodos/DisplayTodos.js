@@ -1,12 +1,19 @@
 import React from "react";
 import Todo from "./Todo";
 
-const DisplayTodos = () => {
+const DisplayTodos = ({ todos, setStorage, storage }) => {
+  // const todos = [{ data: "Buy pizza", isChecked: false }];
+
   return (
     <div style={styles.container}>
-      <Todo />
-      <Todo />
-      <Todo />
+      {todos.map((todo) => (
+        <Todo
+          key={todo.id}
+          todo={todo}
+          setStorage={setStorage}
+          storage={storage}
+        />
+      ))}
     </div>
   );
 };

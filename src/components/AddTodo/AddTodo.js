@@ -1,10 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { nanoid } from "nanoid";
 
-const AddTodo = () => {
+const AddTodo = ({ storage, setStorage }) => {
+  // user type on textfield
+  // user click add button
+  // store data somewhere
+  //  we store (dataText, id, isChecked)
+  // display new todo below
+  //
+  // user click delete button
+  // the todo that got clicked delete will be removed
+  // (remove that todo object from the array)
+  const [newTodo, setNewTodo] = useState("");
+
+  const savingNewTodo = (event) => {
+    setNewTodo(event.target.value);
+  };
+
+  const addTodo = (event, favFood) => {
+    event.preventDefault();
+    setStorage([...storage, { id: nanoid(), data: favFood, isChecked: false }]);
+  };
+
+  console.log(storage);
+
   return (
     <div style={styles.container}>
-      <h2>Text Box</h2>
-      <button>Add</button>
+      <form style={styles.form}>
+        <input
+          style={styles.textInput}
+          type="text"
+          id="fname"
+          name="fname"
+          placeholder="Add todo"
+          value={newTodo || ""}
+          onChange={savingNewTodo}
+        />
+
+        <button
+          style={styles.addTodoButton}
+          onClick={(event) => addTodo(event, newTodo)}
+        >
+          +
+        </button>
+      </form>
     </div>
   );
 };
@@ -12,7 +51,33 @@ const AddTodo = () => {
 const styles = {
   container: {
     display: "flex",
-    backgroundColor: "lightgreen",
+    justifyContent: "center",
+    // backgroundColor: "lightgreen",
+    padding: "10px",
+  },
+  form: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+    width: "80%",
+  },
+  textInput: {
+    padding: "10px",
+    width: "300px",
+    marginRight: "10px",
+    fontSize: "20px",
+    border: "2px solid #ff9ca9",
+    borderRadius: "15px",
+  },
+  addTodoButton: {
+    backgroundColor: "#ff4d64",
+    color: "#ffffff",
+    fontSize: "30px",
+    minWidth: "55px",
+    minHeight: "50px",
+    padding: "0",
+    borderRadius: "50%",
+    border: "1px solid #ff3650",
   },
 };
 
