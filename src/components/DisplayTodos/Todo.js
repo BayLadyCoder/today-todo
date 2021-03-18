@@ -1,43 +1,24 @@
 import React, { useState } from "react";
 
-const Todo = ({ todo, setStorage, storage }) => {
+const Todo = ({ todo, deleteTodo, updateTodo, completeTodo, deleteTask }) => {
   const [isOnEdit, setIsOnEdit] = useState(false);
 
   const handleDeleteTodo = (id) => {
-    // delete this todo from the storage
-    const newState = storage.filter((eachTodo) => eachTodo.id !== id);
-    setStorage(newState);
+    deleteTodo(id);
+    deleteTask();
   };
 
   const handleTodoCheckbox = (id) => {
-    // toggle todo's isChecked
-    const newState = storage.map((todo) => {
-      if (todo.id === id) {
-        todo.isChecked = !todo.isChecked;
-      }
-      return todo;
-    });
-    setStorage(newState);
+    completeTodo(id);
   };
-
-  // if user click on edit button/icon, change from <p></p> to input textbox  DONE!!
-  // user can change value in textbox , update todo data in database, DONE!!
-  // user press enter (or press finish button),
-  // change element back to <p></p>
 
   const handleOnClickEdit = () => {
     setIsOnEdit(true);
   };
 
   const handleOnChangeToDo = (e, id) => {
-    const newState = storage.map((eachTodo) => {
-      if (eachTodo.id === id) {
-        eachTodo.data = e.target.value;
-      }
-      return eachTodo;
-    });
-
-    setStorage(newState);
+    console.log(e.target.value);
+    updateTodo(id, e.target.value);
   };
 
   const handleKeyPressEnter = (e) => {

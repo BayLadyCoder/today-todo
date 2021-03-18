@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
 
-const AddTodo = ({ storage, setStorage }) => {
+const AddTodo = ({ addTodoAction, addTaskAction }) => {
   // user type on textfield
   // user click add button
   // store data somewhere
@@ -17,12 +17,11 @@ const AddTodo = ({ storage, setStorage }) => {
     setNewTodo(event.target.value);
   };
 
-  const addTodo = (event, favFood) => {
+  const addTodo = (event) => {
     event.preventDefault();
-    setStorage([...storage, { id: nanoid(), data: favFood, isChecked: false }]);
+    addTodoAction({ id: nanoid(), data: newTodo, isChecked: false });
+    addTaskAction();
   };
-
-  console.log(storage);
 
   return (
     <div style={styles.container}>
@@ -39,7 +38,7 @@ const AddTodo = ({ storage, setStorage }) => {
 
         <button
           style={styles.addTodoButton}
-          onClick={(event) => addTodo(event, newTodo)}
+          onClick={(event) => addTodo(event)}
         >
           +
         </button>
@@ -67,7 +66,7 @@ const styles = {
     marginRight: "10px",
     fontSize: "20px",
     border: "2px solid #ff9ca9",
-    borderRadius: "15px",
+    borderRadius: "5px",
   },
   addTodoButton: {
     backgroundColor: "#ff4d64",
