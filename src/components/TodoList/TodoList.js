@@ -103,10 +103,11 @@ const styles = {
     display: "flex",
     backgroundColor: "#ffffff",
     flexDirection: "column",
-    minWidth: "350px",
+    minWidth: "320px",
     width: "40%",
     maxWidth: "550px",
     borderRadius: "5px",
+    marginBottom: "20px",
   },
   infoHeader: {
     display: "flex",

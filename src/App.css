@@ -1,7 +1,23 @@
 .App {
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   align-items: center;
   font-family: 'Source Sans Pro', sans-serif;
+}
+
+.headerText {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffffff;
+  margin: 55px 0px;
+  text-shadow: 2px 2px #3a2ee6;
+  font-size: 45px;
+}
+
+@media only screen and (max-width: 600px) {
+  .headerText {
+    margin: 10px 0px;
+    font-size: 40px;
+  }
 }
