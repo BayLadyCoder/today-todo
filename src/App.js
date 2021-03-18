@@ -24,7 +24,7 @@ const styles = {
   headerText: {
     fontFamily: "'Source Sans Pro', sans-serif",
     color: "#ffffff",
-    margin: "30px",
+    margin: "55px",
     textShadow: "2px 2px #3a2ee6",
     fontSize: "45px",
   },
