@@ -21,6 +21,7 @@ const AddTodo = ({ addTodoAction, addTaskAction }) => {
     event.preventDefault();
     addTodoAction({ id: nanoid(), data: newTodo, isChecked: false });
     addTaskAction();
+    setNewTodo("");
   };
 
   return (
@@ -29,8 +30,8 @@ const AddTodo = ({ addTodoAction, addTaskAction }) => {
         <input
           style={styles.textInput}
           type="text"
-          id="fname"
-          name="fname"
+          id="newTodo"
+          name="newTodo"
           placeholder="Add todo"
           value={newTodo || ""}
           onChange={savingNewTodo}
@@ -51,7 +52,6 @@ const styles = {
   container: {
     display: "flex",
     justifyContent: "center",
-    // backgroundColor: "lightgreen",
     padding: "10px",
   },
   form: {
@@ -67,6 +67,7 @@ const styles = {
     fontSize: "20px",
     border: "2px solid #ff9ca9",
     borderRadius: "5px",
+    color: "#303030",
   },
   addTodoButton: {
     backgroundColor: "#ff4d64",

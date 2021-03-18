@@ -1,7 +1,7 @@
 const todoReducer = (todos = [], action) => {
   switch (action.type) {
     case "ADD_TODO":
-      return [...todos, action.payload];
+      return [action.payload, ...todos];
     case "UPDATE_TODO":
       const newStateUpdateTodo = todos.map((eachTodo) => {
         const newTodo = { ...eachTodo };

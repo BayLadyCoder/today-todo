@@ -123,14 +123,15 @@ const styles = {
   infoDay: {
     fontSize: "23px",
     fontWeight: "bold",
-    color: "#573ef7",
+    color: "#5b45ed",
   },
   infoMonth: {
     color: "#595959",
   },
   infoTotalTasks: {
-    color: "#4f4f4f",
-    fontWeight: "400",
+    color: "#6e6e6e",
+    fontWeight: "500",
+    fontSize: "15px",
   },
 };
 

@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { MdEdit } from "react-icons/md";
+import { FaCheck, FaEdit } from "react-icons/fa";
+import { BsTrash } from "react-icons/bs";
 
 const Todo = ({ todo, deleteTodo, updateTodo, completeTodo, deleteTask }) => {
   const [isOnEdit, setIsOnEdit] = useState(false);
@@ -35,32 +38,47 @@ const Todo = ({ todo, deleteTodo, updateTodo, completeTodo, deleteTask }) => {
         checked={todo.isChecked}
         onChange={() => handleTodoCheckbox(todo.id)}
       />
-      <div style={styles.todoDataContainer} onClick={() => handleOnClickEdit()}>
+      <div style={styles.todoDataContainer}>
         {isOnEdit ? (
-          <input
-            type="text"
-            value={todo.data}
-            onChange={(e) => handleOnChangeToDo(e, todo.id)}
-            onKeyDown={(e) => handleKeyPressEnter(e)}
-          />
+          <div style={styles.todoTextContainer}>
+            <input
+              style={styles.textInput}
+              type="text"
+              value={todo.data}
+              onChange={(e) => handleOnChangeToDo(e, todo.id)}
+              onKeyDown={(e) => handleKeyPressEnter(e)}
+            />
+            <FaCheck
+              onClick={() => setIsOnEdit(false)}
+              style={styles.checkIcon}
+            />
+          </div>
         ) : (
-          <p
-            style={{
-              ...styles.todoData,
-              textDecoration: todo.isChecked ? "line-through" : "none",
-            }}
+          <div
+            onClick={() => handleOnClickEdit()}
+            style={styles.todoTextContainer}
           >
-            {todo.data}
-          </p>
+            <p
+              style={{
+                ...styles.todoData,
+                textDecoration: todo.isChecked ? "line-through" : "none",
+              }}
+            >
+              {todo.data}
+            </p>
+            <MdEdit
+              onClick={() => handleOnClickEdit()}
+              style={styles.editIcon}
+            />
+          </div>
         )}
       </div>
-
-      <button
-        onClick={() => handleDeleteTodo(todo.id)}
-        style={styles.deleteButton}
-      >
-        X
-      </button>
+      {!isOnEdit && (
+        <BsTrash
+          onClick={() => handleDeleteTodo(todo.id)}
+          style={styles.trashIcon}
+        />
+      )}
     </div>
   );
 };
@@ -73,25 +91,51 @@ const styles = {
     padding: "0px 30px",
     borderBottom: "1px solid #ededed",
   },
+  textInput: {
+    color: "#2e2e2e",
+
+    padding: "5px",
+    width: "90%",
+    // marginRight: "10px",
+    fontSize: "16px",
+    border: "2px solid #70e8a9",
+    borderRadius: "5px",
+  },
   checkbox: {
     backgroundColor: "pink",
     fontSize: "20px",
   },
   todoDataContainer: {
     width: "100%",
-    margin: "0 15px",
+    // margin: "0 15px",
     padding: "15px",
+  },
+  todoTextContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    margin: 0,
+    cursor: "pointer",
   },
   todoData: {
     fontSize: "18px",
     color: "#2e2e2e",
-    // textDecoration: "line-through",
   },
-  deleteButton: {
-    border: "1px solid #ffdbe0",
-    borderRadius: "5px",
-    backgroundColor: "#ffdbe0",
-    color: "#cc122c",
+  trashIcon: {
+    color: "#FD8C7E",
+    fontSize: "20px",
+    cursor: "pointer",
+  },
+  checkIcon: {
+    fontSize: "20px",
+    cursor: "pointer",
+    color: "#3ddf8a",
+  },
+  editIcon: {
+    color: "#8c7efd",
+
+    fontSize: "22px",
+    cursor: "pointer",
   },
 };
 
