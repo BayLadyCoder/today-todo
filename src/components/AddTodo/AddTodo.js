@@ -93,6 +93,7 @@ const styles = {
     borderRadius: "50%",
     border: "1px solid #ff3650",
     alignSelf: "flex-start",
+    cursor: "pointer",
   },
 };
 
