@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { MdEdit } from "react-icons/md";
-import { FaCheck, FaEdit } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
+import { Draggable } from "react-beautiful-dnd";
 
-const Todo = ({ todo, deleteTodo, updateTodo, completeTodo, deleteTask }) => {
+const Todo = ({
+  todo,
+  deleteTodo,
+  updateTodo,
+  completeTodo,
+  deleteTask,
+  index,
+}) => {
   const [isOnEdit, setIsOnEdit] = useState(false);
 
   const handleDeleteTodo = (id) => {
@@ -28,58 +36,81 @@ const Todo = ({ todo, deleteTodo, updateTodo, completeTodo, deleteTask }) => {
     if (e.key === "Enter") setIsOnEdit(false);
   };
 
+  const getItemStyle = (isDragging, draggableStyle) => {
+    return {
+      background: isDragging ? "#a8ffbd" : null,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      borderBottom: "1px solid #ededed",
+      padding: "0 20px",
+
+      // styles we need to apply on draggables
+      ...draggableStyle,
+    };
+  };
+
   return (
-    <div style={styles.container}>
-      <input
-        style={styles.checkbox}
-        type="checkbox"
-        name="task1"
-        value={todo.data}
-        checked={todo.isChecked}
-        onChange={() => handleTodoCheckbox(todo.id)}
-      />
-      <div style={styles.todoDataContainer}>
-        {isOnEdit ? (
-          <div style={styles.todoTextContainer}>
-            <input
-              style={styles.textInput}
-              type="text"
-              value={todo.data}
-              onChange={(e) => handleOnChangeToDo(e, todo.id)}
-              onKeyDown={(e) => handleKeyPressEnter(e)}
-            />
-            <FaCheck
-              onClick={() => setIsOnEdit(false)}
-              style={styles.checkIcon}
-            />
+    <Draggable draggableId={todo.id} index={index}>
+      {(provided, snapshot) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={getItemStyle(
+            snapshot.isDragging,
+            provided.draggableProps.style
+          )}
+        >
+          <input
+            style={styles.checkbox}
+            type="checkbox"
+            name="task1"
+            value={todo.data}
+            checked={todo.isChecked}
+            onChange={() => handleTodoCheckbox(todo.id)}
+          />
+          <div style={styles.todoDataContainer}>
+            {isOnEdit ? (
+              <div style={styles.todoTextContainer}>
+                <input
+                  style={styles.textInput}
+                  type="text"
+                  value={todo.data}
+                  onChange={(e) => handleOnChangeToDo(e, todo.id)}
+                  onKeyDown={(e) => handleKeyPressEnter(e)}
+                />
+                <FaCheck
+                  onClick={() => setIsOnEdit(false)}
+                  style={styles.checkIcon}
+                />
+              </div>
+            ) : (
+              <div style={styles.todoTextContainer}>
+                <p
+                  style={{
+                    ...styles.todoData,
+                    textDecoration: todo.isChecked ? "line-through" : "none",
+                  }}
+                >
+                  {todo.data}
+                </p>
+                <MdEdit
+                  onClick={() => handleOnClickEdit()}
+                  style={styles.editIcon}
+                />
+              </div>
+            )}
           </div>
-        ) : (
-          <div
-            onClick={() => handleOnClickEdit()}
-            style={styles.todoTextContainer}
-          >
-            <p
-              style={{
-                ...styles.todoData,
-                textDecoration: todo.isChecked ? "line-through" : "none",
-              }}
-            >
-              {todo.data}
-            </p>
-            <MdEdit
-              onClick={() => handleOnClickEdit()}
-              style={styles.editIcon}
+          {!isOnEdit && (
+            <BsTrash
+              onClick={() => handleDeleteTodo(todo.id)}
+              style={styles.trashIcon}
             />
-          </div>
-        )}
-      </div>
-      {!isOnEdit && (
-        <BsTrash
-          onClick={() => handleDeleteTodo(todo.id)}
-          style={styles.trashIcon}
-        />
+          )}
+        </div>
       )}
-    </div>
+    </Draggable>
   );
 };
 
@@ -96,7 +127,6 @@ const styles = {
 
     padding: "5px",
     width: "90%",
-    // marginRight: "10px",
     fontSize: "16px",
     border: "2px solid #70e8a9",
     borderRadius: "5px",
@@ -107,7 +137,6 @@ const styles = {
   },
   todoDataContainer: {
     width: "100%",
-    // margin: "0 15px",
     padding: "15px",
   },
   todoTextContainer: {

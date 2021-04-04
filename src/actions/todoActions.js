@@ -24,5 +24,11 @@ const completeTodo = (id) => {
     payload: { id: id },
   };
 };
+const reorderTodos = (todos) => {
+  return {
+    type: "REORDER_TODOS",
+    payload: todos,
+  };
+};
 
-export { addTodo, updateTodo, deleteTodo, completeTodo };
+export { addTodo, updateTodo, deleteTodo, completeTodo, reorderTodos };

@@ -32,6 +32,8 @@ const todoReducer = (todos = initialState, action) => {
         return newTodo;
       });
       return newStateCompleteTodo;
+    case "REORDER_TODOS":
+      return [...action.payload];
     default:
       return todos;
   }
