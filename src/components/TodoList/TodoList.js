@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import AddTodo from "../AddTodo";
 import DisplayTodos from "../DisplayTodos";
 import { connect } from "react-redux";
 
 const TodoList = ({ tasks }) => {
-  const [storage, setStorage] = useState([]);
   var months = [
     "January",
     "February",
@@ -92,7 +91,7 @@ const TodoList = ({ tasks }) => {
           )}
         </div>
       </div>
-      <AddTodo storage={storage} setStorage={setStorage} />
+      <AddTodo />
       <DisplayTodos />
     </div>
   );

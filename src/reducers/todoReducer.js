@@ -1,4 +1,11 @@
-const todoReducer = (todos = [], action) => {
+const initialState = [
+  { id: "1", data: "Sleep early", isChecked: false },
+  { id: "2", data: "Learn something new", isChecked: false },
+  { id: "3", data: "Buy grocery", isChecked: false },
+  { id: "4", data: "Feed the cats", isChecked: false },
+];
+
+const todoReducer = (todos = initialState, action) => {
   switch (action.type) {
     case "ADD_TODO":
       return [action.payload, ...todos];
