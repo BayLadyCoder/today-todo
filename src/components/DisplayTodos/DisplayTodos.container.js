@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import DisplayTodos from "./DisplayTodos";
-import { reorderTodos } from "../../actions/todoActions";
+import { reorderTodos } from "../../store/todoActions";
 
 const mapStateToProps = (state) => ({
   todos: state.todos,

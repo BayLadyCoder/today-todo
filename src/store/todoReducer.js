@@ -5,26 +5,27 @@ const initialState = [
   { id: "4", data: "Feed the cats", isChecked: false },
 ];
 
-const todoReducer = (todos = initialState, action) => {
+const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TODO":
-      return [action.payload, ...todos];
+      return [action.payload, ...state];
     case "UPDATE_TODO":
-      const newStateUpdateTodo = todos.map((eachTodo) => {
+      const newStateUpdateTodo = state.map((eachTodo) => {
         const newTodo = { ...eachTodo };
+
         if (newTodo.id === action.payload.id) {
-          newTodo.data = action.payload.newValue;
+          newTodo.data = action.payload.data;
         }
         return newTodo;
       });
       return newStateUpdateTodo;
     case "DELETE_TODO":
-      const newStateDeleteTodo = todos.filter(
-        (eachTodo) => eachTodo.id !== action.payload.todoId
+      const newStateDeleteTodo = state.filter(
+        (eachTodo) => eachTodo.id !== action.payload.id
       );
       return newStateDeleteTodo;
     case "COMPLETE_TODO":
-      const newStateCompleteTodo = todos.map((todo) => {
+      const newStateCompleteTodo = state.map((todo) => {
         const newTodo = { ...todo };
         if (newTodo.id === action.payload.id) {
           newTodo.isChecked = !newTodo.isChecked;
@@ -35,7 +36,7 @@ const todoReducer = (todos = initialState, action) => {
     case "REORDER_TODOS":
       return [...action.payload];
     default:
-      return todos;
+      return state;
   }
 };
 

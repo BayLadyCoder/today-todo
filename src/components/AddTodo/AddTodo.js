@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
 
-const AddTodo = ({ addTodoAction, addTaskAction }) => {
-  // user type on textfield
-  // user click add button
-  // store data somewhere
-  //  we store (dataText, id, isChecked)
-  // display new todo below
-  //
-  // user click delete button
-  // the todo that got clicked delete will be removed
-  // (remove that todo object from the array)
+const AddTodo = ({ addTodoAction }) => {
   const [newTodo, setNewTodo] = useState("");
   const [formError, setFormError] = useState("");
 
@@ -22,7 +13,6 @@ const AddTodo = ({ addTodoAction, addTaskAction }) => {
     event.preventDefault();
     if (newTodo.length > 0) {
       addTodoAction({ id: nanoid(), data: newTodo, isChecked: false });
-      addTaskAction();
       setNewTodo("");
       setFormError("");
     } else {

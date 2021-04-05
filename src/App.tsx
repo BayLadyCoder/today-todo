@@ -3,7 +3,7 @@ import "./App.css";
 import TodoList from "./components/TodoList";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import reducers from "./reducers/combinedReducer";
+import reducers from "./store/combinedReducer";
 
 const App: React.FC = () => {
   return (
