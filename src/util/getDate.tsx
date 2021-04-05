@@ -28,7 +28,7 @@ const dateNum = today.getDate();
 const month = months[today.getMonth()];
 const year = today.getFullYear();
 
-let date;
+let date: JSX.Element;
 switch (dateNum) {
   case 1:
   case 21:

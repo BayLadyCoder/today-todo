@@ -5,16 +5,16 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./reducers/combinedReducer";
 
-function App() {
+const App: React.FC = () => {
   return (
     <Provider store={createStore(reducers)}>
-      <div className="App" style={styles.container}>
+      <div data-testid="app" className="App" style={styles.container}>
         <h1 className="headerText">Today Todo</h1>
         <TodoList />
       </div>
     </Provider>
   );
-}
+};
 
 const styles = {
   container: {
