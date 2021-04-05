@@ -1,3 +1,3 @@
-import Todo from "./Todo.container";
+import Todo from "./Todo";
 
 export default Todo;

@@ -1,42 +1,46 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { MdEdit } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
 import { Draggable } from "react-beautiful-dnd";
+import { deleteTodo, completeTodo, updateTodo } from "../../store/todoActions";
+import { Todo as TodoTypes } from "../../Types/Types";
+interface Props {
+  todo: TodoTypes;
+  index: number;
+}
 
-const Todo = ({
-  todo,
-  deleteTodo,
-  updateTodo,
-  completeTodo,
-  deleteTask,
-  index,
-}) => {
+const Todo: React.FC<Props> = ({ todo, index }) => {
   const [isOnEdit, setIsOnEdit] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleDeleteTodo = (id) => {
-    deleteTodo(id);
-    deleteTask();
+  const handleDeleteTodo = (id: string) => {
+    dispatch(deleteTodo(id));
   };
 
-  const handleTodoCheckbox = (id) => {
-    completeTodo(id);
+  const handleTodoCheckbox = (id: string) => {
+    dispatch(completeTodo(id));
   };
 
   const handleOnClickEdit = () => {
     setIsOnEdit(true);
   };
 
-  const handleOnChangeToDo = (e, id) => {
-    console.log(e.target.value);
-    updateTodo(id, e.target.value);
+  const handleOnChangeToDo = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string
+  ): void => {
+    dispatch(updateTodo(id, e.target.value));
   };
 
-  const handleKeyPressEnter = (e) => {
+  const handleKeyPressEnter = (
+    e: React.KeyboardEvent<HTMLInputElement>
+  ): void => {
     if (e.key === "Enter") setIsOnEdit(false);
   };
 
-  const getItemStyle = (isDragging, draggableStyle) => {
+  const getItemStyle = (isDragging: boolean, draggableStyle: any) => {
     return {
       background: isDragging ? "#a8ffbd" : null,
       display: "flex",
