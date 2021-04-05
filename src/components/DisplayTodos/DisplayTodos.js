@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import Todo from "./Todo.container";
+import Todo from "../Todo";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const DisplayTodos = ({ todos, reorderTodos }) => {
