@@ -1,14 +1,9 @@
-export type Todo = {
+export type TodoType = {
   id: string;
   data: string;
   isChecked: boolean;
 };
 
 export type AppState = {
-  todos: Todo[];
-};
-
-export type Actions<T> = {
-  type: string;
-  payload: T;
+  todos: TodoType[];
 };

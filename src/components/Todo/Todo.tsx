@@ -4,10 +4,10 @@ import { MdEdit } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
 import { BsTrash } from "react-icons/bs";
 import { Draggable } from "react-beautiful-dnd";
-import { deleteTodo, completeTodo, updateTodo } from "../../store/todoActions";
-import { Todo as TodoTypes } from "../../Types/Types";
+import { deleteTodo, completeTodo, updateTodo } from "../../redux/todoActions";
+import { TodoType } from "../../Types/Types";
 interface Props {
-  todo: TodoTypes;
+  todo: TodoType;
   index: number;
 }
 

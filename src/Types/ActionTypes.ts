@@ -1,27 +1,42 @@
-import { Todo } from "./Types";
+import {
+  ADD_TODO,
+  UPDATE_TODO,
+  DELETE_TODO,
+  COMPLETE_TODO,
+  REORDER_TODOS,
+} from "../redux/todoActions";
 
-type AddTodo = {
-  type: string;
-  payload: Todo;
+import { TodoType } from "./Types";
+
+export type IdAndNewTodoData = {
+  id: string;
+  data: string;
 };
-type UpdateTodo = {
-  type: string;
-  payload: { id: string; data: string };
-};
-type DeleteOrCompleteTodo = {
-  type: string;
+
+export interface AddTodo {
+  type: typeof ADD_TODO;
+  payload: TodoType;
+}
+export interface UpdateTodo {
+  type: typeof UPDATE_TODO;
+  payload: IdAndNewTodoData;
+}
+export interface DeleteTodo {
+  type: typeof DELETE_TODO;
   payload: { id: string };
-};
+}
+export interface CompleteTodo {
+  type: typeof COMPLETE_TODO;
+  payload: { id: string };
+}
+export interface ReorderTodos {
+  type: typeof REORDER_TODOS;
+  payload: TodoType[];
+}
 
-type ReorderTodo = {
-  type: string;
-  payload: Todo[];
-};
-
-export type AllActionTypes =
+export type TodoDispatchType =
   | AddTodo
   | UpdateTodo
-  | DeleteOrCompleteTodo
-  | ReorderTodo;
-
-export type ActionTypes<T> = T;
+  | DeleteTodo
+  | CompleteTodo
+  | ReorderTodos;
