@@ -5,5 +5,5 @@ export type TodoType = {
 };
 
 export type AppState = {
-  todos: TodoType[];
+  todoList: TodoType[];
 };

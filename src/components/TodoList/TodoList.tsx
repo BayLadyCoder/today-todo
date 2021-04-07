@@ -1,6 +1,6 @@
 import React from "react";
 import AddTodo from "../AddTodo";
-import DisplayTodos from "../DisplayTodos";
+import DisplayTodoList from "../DisplayTodoList";
 import { day, date, month, year } from "../../util/getDate";
 import { useSelector } from "react-redux";
 import {
@@ -14,7 +14,7 @@ import {
 import { AppState } from "../../Types/Types";
 
 const TodoList: React.FC = () => {
-  const tasks = useSelector((state: AppState) => state.todos.length);
+  const tasks = useSelector((state: AppState) => state.todoList.length);
   return (
     <Container>
       <InfoHeader>
@@ -35,7 +35,7 @@ const TodoList: React.FC = () => {
         </InfoTotalTasks>
       </InfoHeader>
       <AddTodo />
-      <DisplayTodos />
+      <DisplayTodoList />
     </Container>
   );
 };

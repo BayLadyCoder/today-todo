@@ -3,7 +3,7 @@ import {
   UPDATE_TODO,
   DELETE_TODO,
   COMPLETE_TODO,
-  REORDER_TODOS,
+  REORDER_TODO_LIST,
 } from "../redux/todoActions";
 
 import { TodoType } from "./Types";
@@ -29,8 +29,8 @@ export interface CompleteTodo {
   type: typeof COMPLETE_TODO;
   payload: { id: string };
 }
-export interface ReorderTodos {
-  type: typeof REORDER_TODOS;
+export interface ReorderTodoList {
+  type: typeof REORDER_TODO_LIST;
   payload: TodoType[];
 }
 
@@ -39,4 +39,4 @@ export type TodoDispatchType =
   | UpdateTodo
   | DeleteTodo
   | CompleteTodo
-  | ReorderTodos;
+  | ReorderTodoList;

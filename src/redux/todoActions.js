@@ -3,7 +3,7 @@ export const ADD_TODO = "ADD_TODO";
 export const UPDATE_TODO = "UPDATE_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const COMPLETE_TODO = "COMPLETE_TODO";
-export const REORDER_TODOS = "REORDER_TODOS";
+export const REORDER_TODO_LIST = "REORDER_TODO_LIST";
 
 export const addTodo = (todo) => {
   return {
@@ -31,9 +31,9 @@ export const completeTodo = (id) => {
     payload: { id },
   };
 };
-export const reorderTodos = (todos) => {
+export const reorderTodoList = (todoList) => {
   return {
-    type: REORDER_TODOS,
-    payload: todos,
+    type: REORDER_TODO_LIST,
+    payload: todoList,
   };
 };

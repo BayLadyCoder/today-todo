@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import DisplayTodos from "./DisplayTodos";
+import DisplayTodos from "./DisplayTodoList";
 import { reorderTodos } from "../../redux/todoActions";
 
 const mapStateToProps = (state) => ({

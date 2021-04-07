@@ -4,7 +4,7 @@ import {
   UPDATE_TODO,
   DELETE_TODO,
   COMPLETE_TODO,
-  REORDER_TODOS,
+  REORDER_TODO_LIST,
 } from "./todoActions";
 
 const initialState = [
@@ -42,7 +42,7 @@ const todoReducer = (state = initialState, action: TodoDispatchType) => {
         return newTodo;
       });
       return newStateCompleteTodo;
-    case REORDER_TODOS:
+    case REORDER_TODO_LIST:
       return [...action.payload];
     default:
       return state;
