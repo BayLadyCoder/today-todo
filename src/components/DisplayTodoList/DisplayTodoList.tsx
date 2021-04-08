@@ -35,7 +35,7 @@ const DisplayTodoList: React.FC = () => {
       );
       dispatch(reorderTodoList(items));
     },
-    [reorderTodoList, todoList]
+    [dispatch, todoList]
   );
 
   const getListStyle = (

@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
+import { addTodo as addTodoAction } from "../../redux/todoActions";
+import { useDispatch } from "react-redux";
 
-const AddTodo = ({ addTodoAction }) => {
+const AddTodo: React.FC = () => {
   const [newTodo, setNewTodo] = useState("");
   const [formError, setFormError] = useState("");
+  const dispatch = useDispatch();
 
-  const savingNewTodo = (event) => {
+  const savingNewTodo = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodo(event.target.value);
   };
 
-  const addTodo = (event) => {
+  const addTodo = (event: React.MouseEvent) => {
     event.preventDefault();
     if (newTodo.length > 0) {
-      addTodoAction({ id: nanoid(), data: newTodo, isChecked: false });
+      dispatch(
+        addTodoAction({ id: nanoid(), data: newTodo, isChecked: false })
+      );
       setNewTodo("");
       setFormError("");
     } else {
@@ -38,10 +43,7 @@ const AddTodo = ({ addTodoAction }) => {
           )}
         </div>
 
-        <button
-          style={styles.addTodoButton}
-          onClick={(event) => addTodo(event)}
-        >
+        <button style={styles.addTodoButton} onClick={addTodo}>
           +
         </button>
       </form>
