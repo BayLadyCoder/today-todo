@@ -25,7 +25,22 @@ describe("AddTodo", () => {
         <AddTodo />
       </ReduxProvider>
     );
-    const addTodoForm = getByTestId("add-todo-form");
-    expect(addTodoForm).toBeInTheDocument();
+    expect(getByTestId("add-todo-form")).toBeInTheDocument();
+    expect(getByTestId("add-todo-text-input")).toBeInTheDocument();
+    expect(getByTestId("add-todo-button")).toBeInTheDocument();
+  });
+
+  test("Add new todo to text input", () => {
+    const { getByTestId } = render(
+      <ReduxProvider>
+        <AddTodo />
+      </ReduxProvider>
+    );
+
+    expect(getByTestId("add-todo-text-input")).toHaveValue("");
+    fireEvent.change(getByTestId("add-todo-text-input"), {
+      target: { value: "Buy bananas" },
+    });
+    expect(getByTestId("add-todo-text-input")).toHaveValue("Buy bananas");
   });
 });
