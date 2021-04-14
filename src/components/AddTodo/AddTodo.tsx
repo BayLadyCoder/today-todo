@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Container,
   Form,
@@ -10,12 +10,20 @@ import AddTodoLogic from "./AddTodo.logic";
 
 const AddTodo: React.FC = () => {
   const { savingNewTodo, addTodo, formError, newTodo } = AddTodoLogic();
+  const addTodoInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (addTodoInputRef.current) {
+      addTodoInputRef.current.focus();
+    }
+  }, []);
 
   return (
     <Container data-testid="add-todo-form">
       <Form>
         <div>
           <TextInput
+            ref={addTodoInputRef}
             data-testid="add-todo-text-input"
             type="text"
             id="newTodo"
