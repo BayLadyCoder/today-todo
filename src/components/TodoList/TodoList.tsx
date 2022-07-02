@@ -12,9 +12,10 @@ import {
   InfoTotalTasks,
 } from "./TodoList.style";
 import { AppState } from "../../Types/Types";
+import Footer from "../Footer";
 
 const TodoList: React.FC = () => {
-  const tasks = useSelector((state: AppState) => state.todoList.length);
+  const tasks = useSelector((state: AppState) => state.todoList.todos.length);
   return (
     <Container>
       <InfoHeader>
@@ -36,6 +37,7 @@ const TodoList: React.FC = () => {
       </InfoHeader>
       <AddTodo />
       <DisplayTodoList />
+      <Footer />
     </Container>
   );
 };

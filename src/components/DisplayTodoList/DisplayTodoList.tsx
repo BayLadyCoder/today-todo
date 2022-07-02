@@ -8,7 +8,7 @@ import CSS from "csstype";
 
 const DisplayTodoList: React.FC = () => {
   const dispatch = useDispatch();
-  const todoList = useSelector((state: AppState) => state.todoList);
+  const todoList = useSelector((state: AppState) => state.todoList.todos);
 
   const reorder = (
     list: TodoType[],

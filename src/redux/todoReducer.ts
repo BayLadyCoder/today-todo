@@ -7,19 +7,24 @@ import {
   REORDER_TODO_LIST,
 } from "./todoActions";
 
-const initialState = [
+const initialTodo = [
   { id: "1", data: "Sleep early", isChecked: false },
   { id: "2", data: "Learn something new", isChecked: false },
   { id: "3", data: "Buy grocery", isChecked: false },
   { id: "4", data: "Feed the cats", isChecked: false },
 ];
 
+const initialState = {
+  todos: initialTodo,
+  tasksDone: 0,
+};
+
 const todoReducer = (state = initialState, action: TodoDispatchType) => {
   switch (action.type) {
     case ADD_TODO:
-      return [action.payload, ...state];
+      return { ...state, todos: [action.payload, ...state.todos] };
     case UPDATE_TODO:
-      const newStateUpdateTodo = state.map((eachTodo) => {
+      const newStateUpdateTodo = state.todos.map((eachTodo) => {
         const newTodo = { ...eachTodo };
 
         if (newTodo.id === action.payload.id) {
@@ -27,23 +32,27 @@ const todoReducer = (state = initialState, action: TodoDispatchType) => {
         }
         return newTodo;
       });
-      return newStateUpdateTodo;
+      return { ...state, todos: newStateUpdateTodo };
     case DELETE_TODO:
-      const newStateDeleteTodo = state.filter(
+      const newStateDeleteTodo = state.todos.filter(
         (eachTodo) => eachTodo.id !== action.payload.id
       );
-      return newStateDeleteTodo;
+      return { ...state, todos: newStateDeleteTodo };
     case COMPLETE_TODO:
-      const newStateCompleteTodo = state.map((todo) => {
+      let newTasksDone;
+      const newStateCompleteTodo = state.todos.map((todo) => {
         const newTodo = { ...todo };
         if (newTodo.id === action.payload.id) {
           newTodo.isChecked = !newTodo.isChecked;
+          newTasksDone = newTodo.isChecked
+            ? state.tasksDone + 1
+            : state.tasksDone - 1;
         }
         return newTodo;
       });
-      return newStateCompleteTodo;
+      return { tasksDone: newTasksDone, todos: newStateCompleteTodo };
     case REORDER_TODO_LIST:
-      return [...action.payload];
+      return { ...state, todos: [...action.payload] };
     default:
       return state;
   }
